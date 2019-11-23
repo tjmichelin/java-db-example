@@ -16,7 +16,7 @@ public class SQLiteTut {
 		try {
 			dao = new StudentDBDAO();
 			
-			Optional<Student> op = dao.getStudentById(2);
+			Optional<Student> op = dao.getStudentById(1);
 			if (op.isPresent()) {
 				System.out.println(op.get().toString());
 			} else {

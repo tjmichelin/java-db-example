@@ -6,16 +6,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.unesp.feg.esw.sqltut.database.Db;
 import com.unesp.feg.esw.sqltut.database.SQLiteDB;
 import com.unesp.feg.esw.sqltut.model.Student;
 
 public class StudentDBDAO implements StudentDAO {
 
-	private SQLiteDB db;
+	private Db db;
 	private String dbUrl;
 	
 	public StudentDBDAO() throws Exception {
-		this.dbUrl = "data/javatut.db";
+		this.dbUrl = "data/sqltut.db";
 		this.db = new SQLiteDB(this.dbUrl);
 	}
 	
@@ -109,6 +110,11 @@ public class StudentDBDAO implements StudentDAO {
 		this.db.getConnection().commit();
 		this.db.getConnection().setAutoCommit(true);
 		updateStudent.close();
+	}
+	
+	@Override
+	protected void finalize() {
+		this.db.closeConnection();
 	}
 
 }
